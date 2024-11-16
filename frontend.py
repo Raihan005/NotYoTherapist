@@ -107,14 +107,14 @@ if st.session_state.page == "selection":
 
 # Check if a personality has been selected
     if "selected_personality" in st.session_state:
-        st.write(f"You selected: **{st.session_state.selected_personality}**")
+        st.write(f"You selected: {st.session_state.selected_personality}")
     else:
         st.warning("Please select a personality.")
 
     # Add a "Next" button to proceed
     if st.button("Next"):
         if "selected_personality" in st.session_state:
-            st.success(f"You are now proceeding with: **{st.session_state.selected_personality}**")
+            st.success(f"You are now proceeding with: {st.session_state.selected_personality}")
             st.session_state.page = "chat"  # Navigate to chat page
         else:
             st.warning("Please select a personality before proceeding.")
@@ -143,9 +143,11 @@ elif st.session_state.page == "chat":
     # Accept user input
     if prompt := st.chat_input(placeholder="What is up?"):
         key = st.session_state.selected_personality
+        print(key)
         if (key == "Kanye West"):
             msg = kanye(prompt)
-        elif key == "Gordon Ramsay":
+        elif key.strip() == "Gordon":
+            print("Entered Here")
             msg  = Gordon(prompt)
         elif key == "Steven He":
             msg = Steven(prompt)
